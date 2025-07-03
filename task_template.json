@@ -1,0 +1,76 @@
+{
+  "gid": "1210348643511573",
+  "actual_time_minutes": null,
+  "assignee": null,
+  "assignee_status": "upcoming",
+  "completed": true,
+  "completed_at": "2025-06-02T01:27:33.449Z",
+  "created_at": "2025-05-22T02:02:50.908Z",
+  "custom_fields": [
+    {
+      "gid": "1210350724800557",
+      "enabled": true,
+      "enum_options": [
+        {
+          "gid": "1210350724800558",
+          "color": "indigo",
+          "enabled": true,
+          "name": "TC",
+          "resource_type": "enum_option"
+        }
+      ],
+      "multi_enum_values": [],
+      "name": "Teams",
+      "description": "",
+      "created_by": {
+        "gid": "1209155992988905",
+        "name": "Patipat Chewprecha",
+        "resource_type": "user"
+      },
+      "display_value": null,
+      "resource_subtype": "multi_enum",
+      "resource_type": "custom_field",
+      "is_formula_field": false,
+      "is_value_read_only": false,
+      "type": "multi_enum"
+    }
+  ],
+  "due_at": null,
+  "due_on": "2025-05-30",
+  "followers": [
+    {
+      "gid": "1209199171987348",
+      "name": "Viriya Taecharungroj",
+      "resource_type": "user"
+    }
+  ],
+  "hearted": false,
+  "hearts": [],
+  "liked": false,
+  "likes": [],
+  "memberships": [{
+      "project" : {
+        "gid" : "1210348643511562",
+        "name" : "Weekly Priorities",
+        "resource_type" : "project"
+      },
+      "section" : {
+        "gid" : "1210348643511565",
+        "name" : "Executives",
+        "resource_type" : "section"
+      }
+    }
+  ],
+  "modified_at": "2025-06-02T01:27:33.717Z",
+  "name": "Week of 26-30 May 2025",
+  "notes": "",
+  "num_hearts": 0,
+  "num_likes": 0,
+  "parent": null,
+  "permalink_url": "https://app.asana.com/1/44778272605915/project/1210348643511562/task/1210348643511573",
+  "projects": [],
+  "resource_type": "task",
+  "start_at": null,
+  "start_on": null,
+  "subtasks": []
+}
