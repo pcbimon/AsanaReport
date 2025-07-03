@@ -1,6 +1,8 @@
 import PyInstaller.__main__
 import os
 import sys
+import subprocess
+import pkg_resources
 
 # Get the absolute path to the script's directory
 base_path = os.path.dirname(os.path.abspath(__file__))
@@ -8,11 +10,18 @@ base_path = os.path.dirname(os.path.abspath(__file__))
 # Define paths
 desktop_app_path = os.path.join(base_path, "desktop_app.py")
 icon_path = os.path.join(base_path, "static", "icon.ico")
-hooks_path = os.path.join(base_path, "hooks")
-runtime_hooks_path = os.path.join(base_path, "runtime_hooks")
 
 # Check if icon exists, if not, create an empty list
 icon_option = ["--icon", icon_path] if os.path.exists(icon_path) else []
+
+# Make sure all required packages are installed
+required_packages = ['streamlit', 'pandas', 'plotly', 'pillow']
+for package in required_packages:
+    try:
+        pkg_resources.get_distribution(package)
+    except pkg_resources.DistributionNotFound:
+        print(f"Package {package} not found, installing...")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
 # Define arguments for PyInstaller
 args = [
@@ -21,15 +30,11 @@ args = [
     "--onedir",
     "--noconsole",
     "--clean",
-    "--additional-hooks-dir", hooks_path,
-    "--runtime-hook", os.path.join(runtime_hooks_path, "fix_imports.py"),
     "--hidden-import=importlib.metadata",
+    "--hidden-import=importlib.resources",
     "--hidden-import=streamlit",
-    "--hidden-import=plotly",
-    "--hidden-import=plotly.graph_objs",
     "--collect-all=streamlit",
-    "--collect-all=plotly",
-    "--collect-data=plotly",
+    "--collect-all=importlib.metadata",
     "--add-data", f"{os.path.join(base_path, 'modules')}{os.pathsep}modules",
     "--add-data", f"{os.path.join(base_path, 'static')}{os.pathsep}static",
     "--add-data", f"{os.path.join(base_path, 'Task.py')}{os.pathsep}.",
