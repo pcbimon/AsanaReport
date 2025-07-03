@@ -34,6 +34,8 @@
 
 ## วิธีการรันแอปพลิเคชัน
 
+### วิธีที่ 1: รันเป็น Web Application
+
 1. หลังจากติดตั้งเสร็จแล้ว รันคำสั่งนี้เพื่อเริ่มแอปพลิเคชัน
    ```
    streamlit run app.py
@@ -43,6 +45,26 @@
    ```
    http://localhost:8501
    ```
+
+### วิธีที่ 2: สร้างและรันเป็น Desktop Application
+
+#### Windows
+1. สร้าง Desktop Application สำหรับ Windows:
+   ```
+   python build_windows_app.py
+   ```
+
+2. หลังจากการสร้างเสร็จสมบูรณ์ ไฟล์ executable จะอยู่ใน `dist/AsanaReportApp`
+   ให้เปิดโฟลเดอร์นั้นและเรียกใช้ไฟล์ `AsanaReportApp.exe`
+
+#### macOS
+1. สร้าง Desktop Application สำหรับ macOS:
+   ```
+   python build_macos_app.py
+   ```
+
+2. หลังจากการสร้างเสร็จสมบูรณ์ แอปพลิเคชันจะอยู่ใน `dist/AsanaReportApp.app`
+   ให้เปิดโฟลเดอร์ `dist` และเรียกใช้แอป `AsanaReportApp.app`
 
 ## ข้อมูลเพิ่มเติม
 

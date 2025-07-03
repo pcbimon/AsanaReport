@@ -1,6 +1,8 @@
 import streamlit as st
 from datetime import datetime
 import pandas as pd
+import os
+import sys
 
 # นำเข้าโมดูลที่สร้างขึ้นใหม่
 from modules.data_loader import load_tasks_data
@@ -15,6 +17,7 @@ from modules.visualizer import (
     display_timeline_chart, display_main_task_stats
 )
 from modules.utils import get_current_time
+from modules.desktop_utils import is_packaged_app, get_os_type, get_resource_path, get_file_source_type
 
 # ตั้งค่าหน้าเว็บ
 st.set_page_config(
@@ -26,17 +29,27 @@ st.set_page_config(
 # หัวข้อหลัก
 st.title("📋 Asana Tasks Report")
 
+# แสดงข้อมูลเพิ่มเติมเกี่ยวกับการใช้งานบน Desktop
+is_desktop = is_packaged_app()
+if is_desktop:
+    os_type = get_os_type()
+    st.sidebar.success(f"กำลังรันเป็นแอปพลิเคชัน Desktop บน {os_type}")
+
 # ให้ผู้ใช้เลือกไฟล์ tasks.json
-uploaded_file = st.file_uploader("อัปโหลดไฟล์ tasks.json", type=["json"])
+from modules.file_dialog import create_file_uploader_with_dialog
+file_source = create_file_uploader_with_dialog("อัปโหลดไฟล์ tasks.json", type=["json"], is_desktop=is_desktop)
 
 # กำหนดไฟล์ tasks.json ที่จะใช้
-if uploaded_file is not None:
-    # ใช้ไฟล์ที่อัปโหลด
-    tasks = load_tasks_data(uploaded_file)
-    tasks_file = uploaded_file.name
+if file_source is not None:
+    # ใช้ฟังก์ชัน get_file_source_type เพื่อตรวจสอบประเภทของ file_source
+    source_type, filename = get_file_source_type(file_source)
+    
+    # ใช้ไฟล์ที่ได้รับ (ทั้งจาก uploader และ file dialog)
+    tasks = load_tasks_data(file_source)
+    tasks_file = filename
 else:
-    # ไม่มีไฟล์ที่อัปโหลด ให้แสดงข้อความแจ้งเตือน
-    st.warning("กรุณาอัปโหลดไฟล์ tasks.json ก่อนเพื่อแสดงรายงาน")
+    # ไม่มีไฟล์ที่เลือก ให้แสดงข้อความแจ้งเตือน
+    st.warning("กรุณาเลือกไฟล์ tasks.json ก่อนเพื่อแสดงรายงาน")
     tasks = None
     tasks_file = None
 

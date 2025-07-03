@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "Starting Asana Report App..."
+streamlit run app.py
