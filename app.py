@@ -24,7 +24,7 @@ st.set_page_config(
 )
 
 # หัวข้อหลัก
-st.title("📋 Asana Tasks Report Dashboard")
+st.title("📋 Asana Tasks Report")
 
 # โหลดข้อมูล tasks
 tasks_file = "tasks.json"
