@@ -5,19 +5,29 @@ from typing import List
 from Task import Task
 
 @st.cache_data
-def load_tasks_data(file_path: str) -> List[Task]:
+def load_tasks_data(file_source):
     """
     อ่านข้อมูล tasks จากไฟล์ JSON และแปลงเป็น Task objects
     ใช้ @st.cache_data เพื่อ cache ข้อมูลและไม่ต้องอ่านใหม่ทุกครั้ง
+    
+    สามารถรับได้ทั้ง:
+    - file_path (str): เส้นทางไฟล์ JSON
+    - uploaded_file (UploadedFile): ไฟล์ที่อัปโหลดผ่าน st.file_uploader
     """
     try:
-        if not os.path.exists(file_path):
-            st.error(f"ไม่พบไฟล์: {file_path}")
-            return []
-        
         with st.spinner("กำลังโหลดข้อมูล tasks..."):
-            with open(file_path, 'r', encoding='utf-8') as file:
-                data = json.load(file)
+            # ตรวจสอบว่าเป็น uploaded file หรือ file path
+            if hasattr(file_source, 'read'):
+                # กรณีเป็น uploaded file
+                data = json.loads(file_source.read().decode('utf-8'))
+            else:
+                # กรณีเป็น file path (string)
+                if not os.path.exists(file_source):
+                    st.error(f"ไม่พบไฟล์: {file_source}")
+                    return []
+                
+                with open(file_source, 'r', encoding='utf-8') as file:
+                    data = json.load(file)
             
             # ตรวจสอบว่ามี key "data" หรือไม่
             if "data" not in data:

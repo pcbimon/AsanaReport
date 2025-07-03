@@ -26,9 +26,19 @@ st.set_page_config(
 # หัวข้อหลัก
 st.title("📋 Asana Tasks Report")
 
-# โหลดข้อมูล tasks
-tasks_file = "tasks.json"
-tasks = load_tasks_data(tasks_file)
+# ให้ผู้ใช้เลือกไฟล์ tasks.json
+uploaded_file = st.file_uploader("อัปโหลดไฟล์ tasks.json", type=["json"])
+
+# กำหนดไฟล์ tasks.json ที่จะใช้
+if uploaded_file is not None:
+    # ใช้ไฟล์ที่อัปโหลด
+    tasks = load_tasks_data(uploaded_file)
+    tasks_file = uploaded_file.name
+else:
+    # ไม่มีไฟล์ที่อัปโหลด ให้แสดงข้อความแจ้งเตือน
+    st.warning("กรุณาอัปโหลดไฟล์ tasks.json ก่อนเพื่อแสดงรายงาน")
+    tasks = None
+    tasks_file = None
 
 # ประมวลผล subtasks
 if tasks:
@@ -124,4 +134,5 @@ else:
 # แสดงวันที่และเวลาปัจจุบัน
 current_time = get_current_time()
 st.caption(f"เวลาปัจจุบัน: {current_time}")
-st.caption(f"ข้อมูลจากไฟล์: {tasks_file}")
+if tasks_file:
+    st.caption(f"ข้อมูลจากไฟล์: {tasks_file}")
