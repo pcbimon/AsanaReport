@@ -28,7 +28,8 @@ MANIFEST
 
 # PyInstaller
 *.manifest
-*.spec
+# Note: We keep our custom .spec file for building exe
+# *.spec
 
 # Installer logs
 pip-log.txt

@@ -1,7 +1,0 @@
-@echo off
-echo Building Asana Report Desktop App with Plotly fix...
-
-python -c "import PyInstaller.__main__; import os; import sys; base_path = os.path.dirname(os.path.abspath(__file__)); desktop_app_path = os.path.join(base_path, 'desktop_app_robust.py'); hooks_path = os.path.join(base_path, 'hooks'); runtime_hooks_path = os.path.join(base_path, 'runtime_hooks'); icon_path = os.path.join(base_path, 'static', 'icon.ico'); icon_option = ['--icon', icon_path] if os.path.exists(icon_path) else []; args = [desktop_app_path, '--name=AsanaReportApp', '--onedir', '--noconsole', '--clean', '--additional-hooks-dir', hooks_path, '--runtime-hook', os.path.join(runtime_hooks_path, 'fix_imports.py'), '--hidden-import=importlib.metadata', '--hidden-import=streamlit', '--hidden-import=plotly', '--hidden-import=plotly.graph_objs', '--collect-all=streamlit', '--collect-all=plotly', '--collect-data=plotly', '--add-data', f'{os.path.join(base_path, \"modules\")}{os.pathsep}modules', '--add-data', f'{os.path.join(base_path, \"static\")}{os.pathsep}static', '--add-data', f'{os.path.join(base_path, \"Task.py\")}{os.pathsep}.', '--add-data', f'{os.path.join(base_path, \"task_template.json\")}{os.pathsep}.'] + icon_option; PyInstaller.__main__.run(args); print('Build completed. The executable is in the dist/AsanaReportApp directory.')"
-
-echo Build completed. The executable is in the dist/AsanaReportApp directory.
-pause
