@@ -1,0 +1,17 @@
+[theme]
+# Light blue theme configuration
+primaryColor = "#1f77b4"           # สีน้ำเงินหลัก (primary buttons, links)
+backgroundColor = "#f0f8ff"        # สีพื้นหลังฟ้าอ่อน (Alice Blue)
+secondaryBackgroundColor = "#e6f3ff"  # สีพื้นหลังรอง (ฟ้าอ่อนกว่า)
+textColor = "#262730"              # สีข้อความเข้ม
+font = "sans serif"                # ฟอนต์แบบ sans serif
+
+# Optional: Additional configuration
+[server]
+# Disable CORS protection for development
+enableCORS = false
+enableXsrfProtection = false
+
+[browser]
+# Automatically open browser when running
+gatherUsageStats = false

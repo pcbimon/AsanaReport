@@ -59,8 +59,6 @@ venv.bak/
 # VS Code
 .vscode/
 
-# Streamlit
-.streamlit/
 
 # Jupyter Notebook
 .ipynb_checkpoints
